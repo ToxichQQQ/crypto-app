@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import {Header} from "./components/Header";
+import {SearchForm} from "./components/SearchForm";
+import {CryptoList} from "./components/CryptoList";
+import './App.css'
+import axios from "axios";
 
 function App() {
+    const [cryptoData,setCryptoData] = useState([])
+    const [searchValue,setSearchValue] = useState('')
+
+    const fetchCryptoData = async () => {
+        try{
+            const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+            setCryptoData(response.data)
+            console.log('finish')
+        }catch(e) {
+            console.error(e)
+        }
+    }
+
+    useEffect(() => {
+        fetchCryptoData()
+    },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main'>
+      <Header text={'Welcome to Crypto statistics'}/>
+      <SearchForm value={searchValue} onChange={fetchCryptoData} onClick={fetchCryptoData}/>
+      <CryptoList cryptoData={cryptoData}/>
     </div>
   );
 }
