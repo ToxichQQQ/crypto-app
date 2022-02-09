@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-
+import './SearchForm.css'
 
 interface SearchFormProps {
     value: string,
@@ -9,9 +9,9 @@ interface SearchFormProps {
 
 export const SearchForm:FC<SearchFormProps> = ({value,onChange,onClick}) => {
     return(
-        <form>
-            <input value={value}/>
-            <button onClick={onClick}>Refresh</button>
+        <form className='form'>
+            <input value={value} className='searchInput'/>
+            <button onClick={onClick} className='resetButton'>Reset</button>
         </form>
     )
 }
