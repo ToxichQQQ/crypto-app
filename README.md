@@ -13,7 +13,7 @@ To test the application, you need to enter the following commands:
 
 You need to clone the repository using the command:
 
-### `git@github.com:ToxichQQQ/crypto-app.git`
+ `git@github.com:ToxichQQQ/crypto-app.git`
 
 After the repository has been copied, go to the repository and run the `npm install` command.
 
